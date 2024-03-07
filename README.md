@@ -1,6 +1,6 @@
 
 
-TinyWebServer
+WebServer
 ===============
 Linux下基于C++的轻量级Web服务器注释、修改版本.
 原项目来自:https://github.com/qinguoyi/TinyWebServer
