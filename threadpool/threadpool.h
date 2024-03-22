@@ -20,7 +20,7 @@ public:
 
 private:
     /*工作线程运行的函数，它不断从工作队列中取出任务并执行之*/
-    static void *worker(void *arg);//为什么要用静态成员函数呢-----class specific
+    static void *worker(void *arg);
     void run();
 
 private:
@@ -40,7 +40,7 @@ threadpool<T>::threadpool( int actor_model, connection_pool *connPool, int threa
 {
     if (thread_number <= 0 || max_requests <= 0)
         throw std::exception();
-    m_threads = new pthread_t[m_thread_number];     //pthread_t是长整型
+    m_threads = new pthread_t[m_thread_number]; 
     if (!m_threads)
         throw std::exception();
     for (int i = 0; i < thread_number; ++i)
@@ -54,7 +54,7 @@ threadpool<T>::threadpool( int actor_model, connection_pool *connPool, int threa
             delete[] m_threads;
             throw std::exception();
         }
-        //主要是将线程属性更改为unjoinable，使得主线程分离,便于资源的释放，详见PS
+        //使得主线程分离,便于资源的释放
         if (pthread_detach(m_threads[i]))
         {
             delete[] m_threads;
